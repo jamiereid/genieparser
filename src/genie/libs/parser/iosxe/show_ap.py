@@ -1149,7 +1149,7 @@ class ShowApCdpNeighborSchema(MetaParser):
                 Optional("neighbor_name"): str,
                 Optional("neighbor_port"): str,
                 Optional("neighbor_ip_count"): int,
-                Optional("neighbor_ip_addresses"): list
+                Optional("neighbor_ip_addresses"): ListOf(str)
             }
         }
     }
@@ -1199,6 +1199,7 @@ class ShowApCdpNeighbor(ShowApCdpNeighborSchema):
 
         neighbor_count_capture = re.compile(r"^Number\s+of\s+neighbors:\s+(?P<neighbor_count>\d+)$")
         # 0221-cap22                   10.8.33.106                              a02-21-sd-sw1.cisco.com TenGigabitEthernet3/0/47
+        # 0221-cap22                   10.8.33.106                              a02-21-sd-sw1.cisco.com 10.8.32.1   TenGigabitEthernet3/0/47
         neighbor_info_capture = re.compile(
             r"^(?P<ap_name>\S+)\s+(?P<ap_ip>\d+\.\d+\.\d+\.\d+)\s+(?P<neighbor_name>\S+)\s+((?P<neighbor_ip>\S+))?\s+(?P<neighbor_port>\S+)$")
         # Neighbor IP Count: 1
