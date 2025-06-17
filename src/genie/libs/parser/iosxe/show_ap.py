@@ -1238,9 +1238,8 @@ class ShowApCdpNeighbor(ShowApCdpNeighborSchema):
                 ap_cdp_neighbor_dict['ap_name'][ap_name]['neighbor_port'] = neighbor_port
                 if groups['neighbor_ip']:
                     neighbor_ip = groups['neighbor_ip']
-                    if not ap_cdp_neighbor_dict['ap_name'][ap_name].get('neighbor_ip_addresses', {}):
-                        ap_cdp_neighbor_dict['ap_name'][ap_name]['neighbor_ip_addresses'] = []
-                    ap_cdp_neighbor_dict['ap_name'][ap_name]['neighbor_ip_addresses'].append(neighbor_ip)
+                    address_list = ap_cdp_neighbor_dict['ap_name'][ap_name].setdefault('neighbor_ip_addresses', [])
+                    address_list.append(neighbor_ip)
                     
             # Neighbor IP Count: 1
             elif neighbor_ip_count_capture.match(line):
